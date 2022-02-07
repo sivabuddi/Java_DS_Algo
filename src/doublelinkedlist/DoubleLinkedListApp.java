@@ -109,11 +109,36 @@ class DoubleLinkedList{
 			
 		return currentNode;
 			
-			
-		
-		
 }		
+
+	
+	public void insertAfter(int data1, int data2) {
+		
+		DoubleList currentNode= first; 
+		
+		DoubleList newNode = new DoubleList(data2);
+		
+		while(currentNode.data!=data1) {
+			currentNode= currentNode.next;
+		}//while
+		
+		
+		if(currentNode == last) {
+			currentNode.next = newNode;
+			newNode.previous = currentNode;
+		}// element found at the last node
+		
+		else {
+			newNode.next = currentNode.next;
+			currentNode.next.previous = newNode;
 			
+		}// element found at any place other than last position
+		
+		currentNode.next = newNode;
+		newNode.previous = currentNode;
+		
+	}
+	
  	
 	
 	public void displayForward() {
@@ -166,16 +191,14 @@ public class DoubleLinkedListApp {
 						 System.out.println();
 						 System.out.print("List (last ---> first)   ");
 						 dll.displayForward();
-//						 System.out.println();
-//						 System.out.print("List (first--->last)     ");
-//						 dll.deleteLast();
-//						 dll.displayForward();
-//						 
-//						 System.out.println();
-//						 System.out.print("List (first ---> last)   ");
-//						 dll.deleteFirst();
-//						 dll.displayForward();
-
+						 
+						 
+						 dll.insertAfter(22, 77);
+						 dll.insertAfter(33,88);
+						 System.out.println();
+						 System.out.print("List (last ---> first)   ");
+						 dll.displayForward();
+						 
 						 
 
 		

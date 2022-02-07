@@ -1,0 +1,53 @@
+package DynamicProgramming;
+
+/* A Naive recursive implementation
+of 0-1 Knapsack problem */
+class KnapsackNaive {
+ 
+    // A utility function that returns
+    // maximum of two integers
+    static int max(int a, int b)
+    {
+      return (a > b) ? a : b;
+    }
+ 
+    // Returns the maximum profitue that
+    // can be put in a knapsack of
+    // capacity target_weight
+    static int knapSack(int target_weight, int weight[], int profit[], int n)
+    {
+        // Base Case
+        if (n == 0 || target_weight == 0)
+            return 0;
+ 
+        // If weight of the nth item is
+        // more than Knapsack capacity target_weight,
+        // then this item cannot be included
+        // in the optimal solution
+        if (weight[n - 1] > target_weight)
+            return knapSack(target_weight, weight, profit, n - 1);
+ 
+        // Return the maximum of two cases:
+        // (1) nth item included
+        // (2) not included
+        else
+            return max(profit[n - 1]
+                       + knapSack(target_weight - weight[n - 1], weight,
+                                  profit, n - 1),
+                       knapSack(target_weight, weight, profit, n - 1));
+    }
+ 
+    // Driver code
+    public static void main(String args[])
+    {
+        int profit[] = new int[] { 60, 100, 120 };
+        int weight[] = new int[] { 10, 20, 30 };
+        int target_weight = 50;
+        int n = profit.length;
+        System.out.println(knapSack(target_weight, weight, profit, n));
+    }
+}
+
+
+
+
